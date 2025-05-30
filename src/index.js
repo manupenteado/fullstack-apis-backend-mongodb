@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import db from './database/configdb.js';
 import userRoute from './routes/user.route.js';
 import exempleRoute from './routes/exemple.route.js';
-import habitRoutes from './routes/habits.route.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -17,7 +16,6 @@ app.use(cors());
 
 app.use("/users", userRoute);
 app.use("/secureExempleRoute", exempleRoute);
-app.use('/habits', habitRoutes);
 
 
 app.get('/', (req, res) => {
