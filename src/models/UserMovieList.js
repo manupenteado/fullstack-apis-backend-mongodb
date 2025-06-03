@@ -6,4 +6,7 @@ const userMovieListSchema = new mongoose.Schema({
   listType: { type: String, enum: ['wantToWatch', 'watched'], required: true },
 });
 
+userMovieListSchema.index({ user: 1, movieId: 1, listType: 1 }, { unique: true });
+
+
 export default mongoose.model('UserMovieList', userMovieListSchema);
