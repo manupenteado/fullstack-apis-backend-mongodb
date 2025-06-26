@@ -52,3 +52,30 @@ export const deleteMovieFromList = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+
+export const rateMovie = async (req, res) => {
+  const { movieId, rating } = req.body;
+
+  if (!rating || rating < 1 || rating > 5) {
+    return res.status(400).json({ error: 'The rating must be an integer number between 1 and 5.' });
+  }
+
+  try {
+    const movieEntry = await UserMovieList.findOne({
+      user: req.userId,
+      movieId,
+      listType: 'watched'
+    });
+
+    if (!movieEntry) {
+      return res.status(404).json({ error: 'Movie not found on "watched".' });
+    }
+
+    movieEntry.rating = rating;
+    await movieEntry.save();
+
+    res.status(200).json({ message: 'Your rating was sucessful.', movie: movieEntry });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
