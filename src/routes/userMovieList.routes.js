@@ -13,4 +13,7 @@ router.get('/:listType', verifyToken, getMovies);
 // Remover filme da lista
 router.delete('/', verifyToken, deleteMovieFromList);
 
+// Atribuir nota ao filme da lista "watched"
+router.put('/rate', verifyToken, rateMovie);
+
 export default router;
